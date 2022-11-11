@@ -38,15 +38,13 @@
   </div>
   <div class="p-5 mb-4 bg-body rounded-3">
     <h1>クイズ</h1>
-    <div id="quizArea" class="container"></div>
-<!--入力フォーム-->
-<!-- <input type="text" id="content"> -->
-<!--ご自身のTwitterアカウントへ行きます-->
+    <form>
+      <div id="quizArea" class="container"></div>
+    </form>
 
-  <button id="twitter" class="btn btn-primary" type="button">Tweet</button>
+<div>
+  <button id="tweet" class="btn btn-primary" type="button">回答する</button>
 </div>
-
-  
 
     </div>
     <div>
@@ -58,88 +56,126 @@
   </main>
   <nav class="navbar fixed-bottom navbar-dark bg-dark">
     <div class="container-fluid">
-      maroapps
+      maroApps
     </div>
   </nav>
   </body>
 
   <script>
-    (function ($) {   
-      const quiz = ["Q1 フレーバーが異なっても、ポッキーのプレッチェルはすべて同じ味である",
-        "Q2 ポッキーチョコレートのチョコは、2つの産地のカカオを使用している",
-        "Q3  ポッキーチョコレートのプレッチェルはオイルコートされており、コク深く、くちどけよく仕上げられている",
-        "Q4 ポッキー<極細>の細さはポッキーチョコレートの1/3の細さである",
-        "Q5 ポッキー<テイスティー>のプレッチェルには全粒粉が使用されている",
-        "Q6 つぶつぶいちごポッキーのいちごは、甘酸っぱい味わいを残すため低音でフリーズドライされている",
-        "Q7 アーモンドクラッシュポッキーは、浅煎りした粗砕きアーモンドを使用している",
-        "Q8 ポッキー贅沢仕立て<ミルクショコラ>には、ポッキーチョコレート1箱分の約3倍以上のミルクチョコレートがコーティングされている",
-        "Q9 ポッキー贅沢仕立て<アーモンドミルク>は、ビタミンE入である",
-        "Q10 ポッキー贅沢仕立て<アーモンドミルク>のプレッチェルには、発酵バターが練りこまれている",
-        "Q11 ポッキーがふるさと納税の返礼品になっている地域がある"]
-      let count = 1;
-      quiz.forEach(element => {
-              /*
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="q1maru" value="option1">
-  <label class="form-check-label" for="Q1">1</label>
-<div class="form-check form-check-inline">
-      */
-      $("<div>", {
-        class: 'row p-3',
-        id: 'Q'+count+'div',
-        }).appendTo('#quizArea');
+    $(function(){
+      function addQuiz(){
 
-        $("<p>", {
-        class: 'lead font-small',
-        id: 'Q'+count,
-        text: element
-        }).appendTo('#Q'+count+'div');
-
-        const divM = '#divQm'+count;
+        const quiz = ["Q1 フレーバーが異なっても、ポッキーのプレッチェルはすべて同じ味である",
+          "Q2 ポッキーチョコレートのチョコは、2つの産地のカカオを使用している",
+          "Q3  ポッキーチョコレートのプレッチェルはオイルコートされており、コク深く、くちどけよく仕上げられている",
+          "Q4 ポッキー<極細>の細さはポッキーチョコレートの1/3の細さである",
+          "Q5 ポッキー<テイスティー>のプレッチェルには全粒粉が使用されている",
+          "Q6 つぶつぶいちごポッキーのいちごは、甘酸っぱい味わいを残すため低音でフリーズドライされている",
+          "Q7 アーモンドクラッシュポッキーは、浅煎りした粗砕きアーモンドを使用している",
+          "Q8 ポッキー贅沢仕立て<ミルクショコラ>には、ポッキーチョコレート1箱分の約3倍以上のミルクチョコレートがコーティングされている",
+          "Q9 ポッキー贅沢仕立て<アーモンドミルク>は、ビタミンE入である",
+          "Q10 ポッキー贅沢仕立て<アーモンドミルク>のプレッチェルには、発酵バターが練りこまれている",
+          "Q11 ポッキーがふるさと納税の返礼品になっている地域がある"]
+        let count = 1;
+        quiz.forEach(element => {
         $("<div>", {
-        class: 'form-check form-check-inline col-1',
-        id: 'divQm'+count
-        }).appendTo('#Q'+count+'div');
+          class: 'row p-3',
+          id: 'Q'+count+'div',
+          }).appendTo('#quizArea');
 
-        $("<input>", {
-          type: 'radio',
-          id: 'radioQ_maru'+count,
-          name: 'ans'+count,
-          class: 'form-check-input',
-          value: "○"
-        }).appendTo(divM);
-        $("<label>", {
-          id: 'labelQ_maru'+count,
-          for: 'radioQ_maru'+count,
-          class : 'form-check-label col',
-          text: "○"
-        }).appendTo(divM);
+          $("<p>", {
+          class: 'lead font-small',
+          id: 'Q'+count,
+          text: element
+          }).appendTo('#Q'+count+'div');
 
-        const divB = '#divQb'+count;
-        
-        $("<div>", {
-        class: 'form-check form-check-inline col-1',
-        id: 'divQb'+count
-        }).appendTo('#Q'+count+'div');
+          const divM = '#divQm'+count;
+          $("<div>", {
+          class: 'form-check form-check-inline col-1',
+          id: 'divQm'+count
+          }).appendTo('#Q'+count+'div');
 
+          $("<input>", {
+            type: 'radio',
+            id: 'radioQ_maru'+count,
+            name: 'ans'+count,
+            class: 'form-check-input',
+            value: "○"
+          }).appendTo(divM);
+          $("<label>", {
+            id: 'labelQ_maru'+count,
+            for: 'radioQ_maru'+count,
+            class : 'form-check-label col',
+            text: "○"
+          }).appendTo(divM);
 
-        $("<input>", {
-          type: 'radio',
-          id: 'radioQ_batsu'+count,
-          name: 'ans'+count,
-          class: 'form-check-input',
-          value: "Ｘ"
-        }).appendTo(divB);
+          const divB = '#divQb'+count;
           
-        $("<label>", {
-          id: 'labelQ_batsu'+count,
-          for: 'radioQ_batsu'+count,
-          class : 'form-check-label',
-          text: "ｘ"
-        }).appendTo(divB);
+          $("<div>", {
+          class: 'form-check form-check-inline col-1',
+          id: 'divQb'+count
+          }).appendTo('#Q'+count+'div');
+
+
+          $("<input>", {
+            type: 'radio',
+            id: 'radioQ_batsu'+count,
+            name: 'ans'+count,
+            class: 'form-check-input',
+            value: "Ｘ"
+          }).appendTo(divB);
             
-        count++;
-      });
-    })(window.jQuery);
+          $("<label>", {
+            id: 'labelQ_batsu'+count,
+            for: 'radioQ_batsu'+count,
+            class : 'form-check-label',
+            text: "ｘ"
+          }).appendTo(divB);
+              
+          count++;
+        });
+
+      }
+      function onTweetButton(){
+        $("#tweet").click(function(){
+            const param = $("form").serializeArray();
+            if(param.length != 11){
+              alert("すべての質問に回答してください")
+              return;
+            }
+
+            let content = "【#ポッキーってじつは…📝解答用紙】\n";
+            let count = 1;
+            param.forEach(element => {
+              const ans = "Q"+count + ": " + element.value + "\n"
+              content += ans
+              count++
+            });
+
+            content += "  #pockyQuizAnswer";
+
+            const left = Math.round(window.screen.width / 2 - 275);
+            const top = (window.screen.height > 420) ? Math.round(window.screen.height / 2 - 210) : 0;
+            window.open(
+            "https://twitter.com/intent/tweet?text=" + encodeURIComponent(content)+ "&in_reply_to=1590879482767986690",
+            null,
+            "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,left=" + left + ",top=" + top);
+            console.log(param)
+        })
+
+      }
+
+
+      function init(){
+        addQuiz()
+        onTweetButton()
+      }
+      
+      init()
+
+
+
+    });
     
-      </script>
+  </script>
 </html>
