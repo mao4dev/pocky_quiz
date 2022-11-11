@@ -8,8 +8,6 @@
     <meta name="generator" content="Hugo 0.84.0">
     <title>Bottom navbar example · Bootstrap v5.0</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/navbar-bottom/">
-
     <script src="https://code.jquery.com/jquery-3.6.1.slim.js" integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk=" crossorigin="anonymous"></script>
 
     <!-- Bootstrap core CSS -->
@@ -30,8 +28,6 @@
         }
       }
     </style>
-
-    
   </head>
   <body>
     
@@ -42,11 +38,13 @@
   </div>
   <div class="p-5 mb-4 bg-body rounded-3">
     <h1>クイズ</h1>
-    <form action="http://twitter.com/home?status=hogehoge" >
-        <input type="text" name="tweet" value="" />
-        <input type="hidden" name="twitter[]" value="tweet" />
-        <input type="submit" name="" value="ツイート" />
+    <form>
+      <div id="quizArea" class="container"></div>
     </form>
+
+<div>
+  <button id="tweet" class="btn btn-primary" type="button">回答する</button>
+</div>
 
     </div>
     <div>
@@ -55,40 +53,129 @@
 
     </div>
 
-</main>
-<nav class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Bottom navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-        <li class="nav-item dropup">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdown10" data-bs-toggle="dropdown" aria-expanded="false">Dropup</a>
-          <ul class="dropdown-menu" aria-labelledby="dropdown10">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-      </ul>
+  </main>
+  <nav class="navbar fixed-bottom navbar-dark bg-dark">
+    <div class="container-fluid">
+      maroApps
     </div>
-  </div>
-</nav>
-
-
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
-      
+  </nav>
   </body>
+
+  <script>
+    $(function(){
+      function addQuiz(){
+
+        const quiz = ["Q1 フレーバーが異なっても、ポッキーのプレッチェルはすべて同じ味である",
+          "Q2 ポッキーチョコレートのチョコは、2つの産地のカカオを使用している",
+          "Q3  ポッキーチョコレートのプレッチェルはオイルコートされており、コク深く、くちどけよく仕上げられている",
+          "Q4 ポッキー<極細>の細さはポッキーチョコレートの1/3の細さである",
+          "Q5 ポッキー<テイスティー>のプレッチェルには全粒粉が使用されている",
+          "Q6 つぶつぶいちごポッキーのいちごは、甘酸っぱい味わいを残すため低音でフリーズドライされている",
+          "Q7 アーモンドクラッシュポッキーは、浅煎りした粗砕きアーモンドを使用している",
+          "Q8 ポッキー贅沢仕立て<ミルクショコラ>には、ポッキーチョコレート1箱分の約3倍以上のミルクチョコレートがコーティングされている",
+          "Q9 ポッキー贅沢仕立て<アーモンドミルク>は、ビタミンE入である",
+          "Q10 ポッキー贅沢仕立て<アーモンドミルク>のプレッチェルには、発酵バターが練りこまれている",
+          "Q11 ポッキーがふるさと納税の返礼品になっている地域がある"]
+        let count = 1;
+        quiz.forEach(element => {
+        $("<div>", {
+          class: 'row p-3',
+          id: 'Q'+count+'div',
+          }).appendTo('#quizArea');
+
+          $("<p>", {
+          class: 'lead font-small',
+          id: 'Q'+count,
+          text: element
+          }).appendTo('#Q'+count+'div');
+
+          const divM = '#divQm'+count;
+          $("<div>", {
+          class: 'form-check form-check-inline col-1',
+          id: 'divQm'+count
+          }).appendTo('#Q'+count+'div');
+
+          $("<input>", {
+            type: 'radio',
+            id: 'radioQ_maru'+count,
+            name: 'ans'+count,
+            class: 'form-check-input',
+            value: "○"
+          }).appendTo(divM);
+          $("<label>", {
+            id: 'labelQ_maru'+count,
+            for: 'radioQ_maru'+count,
+            class : 'form-check-label col',
+            text: "○"
+          }).appendTo(divM);
+
+          const divB = '#divQb'+count;
+          
+          $("<div>", {
+          class: 'form-check form-check-inline col-1',
+          id: 'divQb'+count
+          }).appendTo('#Q'+count+'div');
+
+
+          $("<input>", {
+            type: 'radio',
+            id: 'radioQ_batsu'+count,
+            name: 'ans'+count,
+            class: 'form-check-input',
+            value: "Ｘ"
+          }).appendTo(divB);
+            
+          $("<label>", {
+            id: 'labelQ_batsu'+count,
+            for: 'radioQ_batsu'+count,
+            class : 'form-check-label',
+            text: "ｘ"
+          }).appendTo(divB);
+              
+          count++;
+        });
+
+      }
+      function onTweetButton(){
+        $("#tweet").click(function(){
+            const param = $("form").serializeArray();
+            if(param.length != 11){
+              alert("すべての質問に回答してください")
+              return;
+            }
+
+            let content = "【#ポッキーってじつは…📝解答用紙】\n";
+            let count = 1;
+            param.forEach(element => {
+              const ans = "Q"+count + ": " + element.value + "\n"
+              content += ans
+              count++
+            });
+
+            content += "  #pockyQuizAnswer";
+
+            const left = Math.round(window.screen.width / 2 - 275);
+            const top = (window.screen.height > 420) ? Math.round(window.screen.height / 2 - 210) : 0;
+            window.open(
+            "https://twitter.com/intent/tweet?text=" + encodeURIComponent(content)+ "&in_reply_to=1590879482767986690",
+            null,
+            "scrollbars=yes,resizable=yes,toolbar=no,location=yes,width=550,height=420,left=" + left + ",top=" + top);
+            console.log(param)
+        })
+
+      }
+
+
+      function init(){
+        addQuiz()
+        onTweetButton()
+      }
+      
+      init()
+
+
+
+    });
+    
+  </script>
 </html>
